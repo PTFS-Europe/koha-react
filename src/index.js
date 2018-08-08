@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AcqInvoiceLineitems from './AcqInvoiceLineitems/AcqInvoiceLineitems';
+import AcqInvoiceLineitemsTable from './AcqInvoiceLineitemsTable/AcqInvoiceLineitemsTable';
 
 ReactDOM.render(
-    <AcqInvoiceLineitems />,
+    <AcqInvoiceLineitemsTable />,
     document.getElementById('react-orderreceive-lineitems')
 );

@@ -36,10 +36,22 @@ export default function withApi(Wrapped) {
             };
         }
 
+        saveItem = item => {
+            // TODO: Make API call to delete item
+            // Upon API success...we should be using the API
+            // response here to update our local model
+            const itemsCopy = [...this.state.items];
+            const index = itemsCopy.findIndex(i => i.id === item.id);
+            itemsCopy.splice(index, 1, item);
+            this.setState({ items: itemsCopy });
+            // TODO: Upon API fail...
+            // TODO: Something here
+        };
+
         addItem = () => {
             const itemsCopy = [...this.state.items];
             itemsCopy.push({
-                id: null,
+                id: -1,
                 invoice: null,
                 order: null,
                 description: null,
@@ -65,22 +77,12 @@ export default function withApi(Wrapped) {
             // TODO: Something here
         };
 
-        handleChange = (id, property, value) => {
-            let itemsCopy = [...this.state.items];
-            let index = itemsCopy.findIndex(i => i.id === id);
-            const newItem = {
-                ...itemsCopy[index],
-                [property]: value
-            };
-            itemsCopy.splice(index, 1, newItem);
-            this.setState({ items: itemsCopy });
-        };
-
         render() {
             return (
                 <Wrapped
                     handleChange={this.handleChange}
                     add={this.addItem}
+                    save={this.saveItem}
                     delete={this.deleteItem}
                     items={this.state.items}
                     {...this.props}

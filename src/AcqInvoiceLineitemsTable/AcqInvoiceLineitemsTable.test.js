@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AcqInvoiceLineitems from './AcqInvoiceLineitems';
+import AcqInvoiceLineitemsTable from './AcqInvoiceLineitemsTable';
 
 it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<AcqInvoiceLineitems />, div);
+    ReactDOM.render(<AcqInvoiceLineitemsTable />, div);
     ReactDOM.unmountComponentAtNode(div);
 });
