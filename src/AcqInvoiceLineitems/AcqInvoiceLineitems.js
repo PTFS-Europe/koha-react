@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AcqInvoiceLineitemsTable from './AcqInvoiceLineitemsTable';
+import AcqInvoiceLineitemsTable from './AcqInvoiceLineitemsTable/AcqInvoiceLineitemsTable';
 import withApiData from '../hoc/withApiData';
 
 const AcqInvoiceLineitems = props => {

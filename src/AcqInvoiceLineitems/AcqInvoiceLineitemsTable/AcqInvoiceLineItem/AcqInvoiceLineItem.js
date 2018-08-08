@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AcqLineItemActions from './AcqInvoiceLineItemActions';
+import AcqLineItemActions from './AcqInvoiceLineItemActions/AcqInvoiceLineItemActions';
 
 const AcqInvoiceLineItem = props => {
     return (
