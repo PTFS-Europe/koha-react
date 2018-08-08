@@ -1,13 +1,17 @@
 import React from 'react';
 
-import AcqInvoiceLineitemsItem from './AcqInvoiceLineitemsItem';
+import AcqInvoiceLineItem from './AcqInvoiceLineItem/AcqInvoiceLineItem';
 
 const AcqInvoiceLineitemsTable = props => {
     return (
         <table>
             <tbody>
                 {props.items.map(item => (
-                    <AcqInvoiceLineitemsItem key={item.id} item={item} />
+                    <AcqInvoiceLineItem
+                        key={item.id}
+                        delete={props.delete}
+                        item={item}
+                    />
                 ))}
             </tbody>
         </table>

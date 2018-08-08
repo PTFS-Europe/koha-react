@@ -1,10 +1,12 @@
 import React from 'react';
 
 import AcqInvoiceLineitemsTable from './AcqInvoiceLineitemsTable';
-import withApi from '../hoc/withApi';
+import withApiData from '../hoc/withApiData';
 
 const AcqInvoiceLineitems = props => {
-    return <AcqInvoiceLineitemsTable items={props.items} />;
+    return (
+        <AcqInvoiceLineitemsTable delete={props.delete} items={props.items} />
+    );
 };
 
-export default withApi(AcqInvoiceLineitems);
+export default withApiData(AcqInvoiceLineitems);
