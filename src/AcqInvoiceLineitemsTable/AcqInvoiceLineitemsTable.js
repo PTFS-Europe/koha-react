@@ -24,6 +24,15 @@ class AcqInvoiceLineitemsTable extends Component {
         this.props.add();
         this.setEditing(-1);
     };
+    getTotal = column => {
+        let total = 0;
+        this.props.items.forEach(i => {
+            if (i.hasOwnProperty(column) && i[column] > 0) {
+                total += parseFloat(i[column]);
+            }
+        });
+        return total;
+    };
     render() {
         return (
             <div>
@@ -68,6 +77,19 @@ class AcqInvoiceLineitemsTable extends Component {
                                 );
                             }
                         })}
+                        <tr>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>{this.getTotal('total_price')}</td>
+                            <td>&nbsp;</td>
+                        </tr>
                     </tbody>
                 </table>
                 <button disabled={this.state.editing} onClick={this.add}>
