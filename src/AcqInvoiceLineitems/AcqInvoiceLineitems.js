@@ -5,7 +5,14 @@ import withApiData from '../hoc/withApiData';
 
 const AcqInvoiceLineitems = props => {
     return (
-        <AcqInvoiceLineitemsTable delete={props.delete} items={props.items} />
+        <div>
+            <AcqInvoiceLineitemsTable
+                handleChange={props.handleChange}
+                delete={props.delete}
+                items={props.items}
+            />
+            <button onClick={props.add}>Add new</button>
+        </div>
     );
 };
 
