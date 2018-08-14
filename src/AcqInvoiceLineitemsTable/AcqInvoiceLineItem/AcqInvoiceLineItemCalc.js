@@ -26,7 +26,12 @@ const AcqInvoiceLineItemCalc = props => {
         return (
             <div>
                 {getVal()}
-                {isCalc() && <span>!</span>}
+                {isCalc() && (
+                    <i
+                        title="Value is calculated"
+                        className="calc-val fa fa-calculator"
+                    />
+                )}
             </div>
         );
     } else {
@@ -39,7 +44,12 @@ const AcqInvoiceLineItemCalc = props => {
                     }
                     value={getVal()}
                 />
-                {isCalc() && <span>!</span>}
+                {isCalc() && (
+                    <i
+                        title="Value is calculated"
+                        className="calc-val fa fa-calculator"
+                    />
+                )}
             </div>
         );
     }
