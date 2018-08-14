@@ -25,7 +25,9 @@ const AcqInvoiceLineItemCalc = props => {
     if (props.disp) {
         return (
             <div>
-                {getVal()}
+                {!isNaN(parseFloat(getVal()).toFixed(2))
+                    ? parseFloat(getVal()).toFixed(2)
+                    : ''}
                 {isCalc() && (
                     <i
                         title="Value is calculated"
