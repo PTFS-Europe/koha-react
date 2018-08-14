@@ -22,18 +22,27 @@ const AcqInvoiceLineItemCalc = props => {
             return '';
         }
     };
-    return (
-        <div>
-            <input
-                type="number"
-                onChange={event =>
-                    props.handleChange(props.propName, event.target.value)
-                }
-                value={getVal()}
-            />
-            {isCalc() && <span>!</span>}
-        </div>
-    );
+    if (props.disp) {
+        return (
+            <div>
+                {getVal()}
+                {isCalc() && <span>!</span>}
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                <input
+                    type="number"
+                    onChange={event =>
+                        props.handleChange(props.propName, event.target.value)
+                    }
+                    value={getVal()}
+                />
+                {isCalc() && <span>!</span>}
+            </div>
+        );
+    }
 };
 
 export default AcqInvoiceLineItemCalc;

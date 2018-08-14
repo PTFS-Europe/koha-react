@@ -1,19 +1,48 @@
 import React from 'react';
 
 import AcqLineItemActions from './AcqInvoiceLineItemActions/AcqInvoiceLineItemActions';
+import AcqInvoiceLineItemCalc from './AcqInvoiceLineItemCalc';
 
 const AcqInvoiceLineItem = props => {
     return (
         <tr>
-            <td>{props.item.description}</td>
+            <td>{props.item.description || ''}</td>
             <td>**Type goes here**</td>
             <td>**Fund goes here**</td>
-            <td>{props.item.list_price}</td>
-            <td>{props.item.discount_rate}</td>
-            <td>{props.item.pre_tax_amount}</td>
-            <td>{props.item.tax_rate}</td>
-            <td>**Tax amount goes here**</td>
-            <td>{props.item.total_price}</td>
+            <td>
+                <AcqInvoiceLineItemCalc
+                    disp
+                    propName="list_price"
+                    item={props.item}
+                    calc={props.calc}
+                />
+            </td>
+            <td>
+                <AcqInvoiceLineItemCalc
+                    disp
+                    propName="discount_rate"
+                    item={props.item}
+                    calc={props.calc}
+                />
+            </td>
+            <td>
+                <AcqInvoiceLineItemCalc
+                    disp
+                    propName="pre_tax_amount"
+                    item={props.item}
+                    calc={props.calc}
+                />
+            </td>
+            <td>{props.item.tax_rate || ''}</td>
+            <td>{props.item.tax_amount || ''}</td>
+            <td>
+                <AcqInvoiceLineItemCalc
+                    disp
+                    propName="total_price"
+                    item={props.item}
+                    calc={props.calc}
+                />
+            </td>
             <td>
                 <AcqLineItemActions
                     editing={props.editing}
