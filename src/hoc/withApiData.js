@@ -13,10 +13,11 @@ export default function withApi(Wrapped) {
                         description: 'This is the item description',
                         quantity: 2,
                         list_price: 13.99,
-                        discount_rate: null,
+                        discount_rate: 10,
                         discount_amount: null,
                         pre_tax_amount: null,
                         tax_rate: null,
+                        tax_amount: null,
                         total_price: null
                     },
                     {
@@ -29,7 +30,8 @@ export default function withApi(Wrapped) {
                         discount_rate: null,
                         discount_amount: null,
                         pre_tax_amount: null,
-                        tax_rate: null,
+                        tax_rate: 20,
+                        tax_amount: null,
                         total_price: null
                     }
                 ]
@@ -54,13 +56,14 @@ export default function withApi(Wrapped) {
                 id: -1,
                 invoice: null,
                 order: null,
-                description: null,
+                description: '',
                 quantity: null,
                 list_price: null,
                 discount_rate: null,
                 discount_amount: null,
                 pre_tax_amount: null,
                 tax_rate: null,
+                tax_amount: null,
                 total_price: null
             });
             this.setState({ items: itemsCopy });

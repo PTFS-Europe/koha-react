@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import withApiData from './../hoc/withApiData';
 import AcqInvoiceLineItemView from './AcqInvoiceLineItem/AcqInvoiceLineItemView';
 import AcqInvoiceLineItemEditable from './AcqInvoiceLineItem/AcqInvoiceLineItemEditable';
+import Calc from '../helper/calc';
 
 class AcqInvoiceLineitemsTable extends Component {
     state = {
@@ -24,15 +25,6 @@ class AcqInvoiceLineitemsTable extends Component {
         this.props.add();
         this.setEditing(-1);
     };
-    getTotal = column => {
-        let total = 0;
-        this.props.items.forEach(i => {
-            if (i.hasOwnProperty(column) && i[column] > 0) {
-                total += parseFloat(i[column]);
-            }
-        });
-        return total;
-    };
     render() {
         return (
             <div>
@@ -45,7 +37,6 @@ class AcqInvoiceLineitemsTable extends Component {
                             <th>List price</th>
                             <th>Discount</th>
                             <th>Your price</th>
-                            <th>Net price</th>
                             <th>Tax rate</th>
                             <th>Tax amount</th>
                             <th>Total</th>
@@ -57,6 +48,7 @@ class AcqInvoiceLineitemsTable extends Component {
                             if (item.id === this.state.editing) {
                                 return (
                                     <AcqInvoiceLineItemEditable
+                                        calc={Calc}
                                         handleChange={this.props.handleChange}
                                         editing={this.state.editing}
                                         key={item.id}
@@ -68,6 +60,7 @@ class AcqInvoiceLineitemsTable extends Component {
                             } else {
                                 return (
                                     <AcqInvoiceLineItemView
+                                        calc={Calc}
                                         setEditing={this.setEditing}
                                         editing={this.state.editing}
                                         key={item.id}
@@ -86,8 +79,9 @@ class AcqInvoiceLineitemsTable extends Component {
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>{this.getTotal('total_price')}</td>
+                            <td>
+                                {Calc.getTotal(this.props.items, 'total_price')}
+                            </td>
                             <td>&nbsp;</td>
                         </tr>
                     </tbody>

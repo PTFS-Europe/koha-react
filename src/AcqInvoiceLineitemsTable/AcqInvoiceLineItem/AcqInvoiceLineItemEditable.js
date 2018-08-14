@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
 import AcqLineItemActions from './AcqInvoiceLineItemActions/AcqInvoiceLineItemActions';
+import AcqInvoiceLineItemCalc from './AcqInvoiceLineItemCalc';
 
 class AcqInvoiceLineItemEditable extends Component {
     state = {
-        item: {}
+        item: {},
+        calculated: {}
     };
     componentDidMount() {
         this.setState({
@@ -12,9 +14,10 @@ class AcqInvoiceLineItemEditable extends Component {
         });
     }
     handleChange = (property, value) => {
+        const newVal = !isNaN(value) ? parseFloat(value) : value;
         const newItem = {
             ...this.state.item,
-            [property]: value
+            [property]: newVal
         };
         this.setState({ item: newItem });
     };
@@ -24,6 +27,7 @@ class AcqInvoiceLineItemEditable extends Component {
             <tr>
                 <td>
                     <input
+                        placeholder="Item description"
                         type="text"
                         onChange={event =>
                             this.handleChange('description', event.target.value)
@@ -34,30 +38,32 @@ class AcqInvoiceLineItemEditable extends Component {
                 <td>**Type goes here**</td>
                 <td>**Fund goes here**</td>
                 <td>
-                    <input
-                        type="number"
-                        onChange={event =>
-                            this.handleChange('list_price', event.target.value)
-                        }
-                        value={this.state.item.list_price || ''}
+                    <AcqInvoiceLineItemCalc
+                        propName="list_price"
+                        handleChange={this.handleChange}
+                        item={this.state.item}
+                        calc={this.props.calc}
+                    />
+                </td>
+                <td>
+                    <AcqInvoiceLineItemCalc
+                        propName="discount_rate"
+                        handleChange={this.handleChange}
+                        item={this.state.item}
+                        calc={this.props.calc}
+                    />
+                </td>
+                <td>
+                    <AcqInvoiceLineItemCalc
+                        propName="pre_tax_amount"
+                        handleChange={this.handleChange}
+                        item={this.state.item}
+                        calc={this.props.calc}
                     />
                 </td>
                 <td>
                     <input
-                        type="number"
-                        onChange={event =>
-                            this.handleChange(
-                                'discount_rate',
-                                event.target.value
-                            )
-                        }
-                        value={this.state.item.discount_rate || ''}
-                    />
-                </td>
-                <td>**Your price goes here**</td>
-                <td>**Net price goes here**</td>
-                <td>
-                    <input
+                        placeholder="Tax rate (%)"
                         type="number"
                         onChange={event =>
                             this.handleChange('tax_rate', event.target.value)
@@ -65,14 +71,22 @@ class AcqInvoiceLineItemEditable extends Component {
                         value={this.state.item.tax_rate || ''}
                     />
                 </td>
-                <td>**Tax amount goes here**</td>
                 <td>
                     <input
+                        placeholder="Tax amount"
                         type="number"
                         onChange={event =>
-                            this.handleChange('total_price', event.target.value)
+                            this.handleChange('tax_amount', event.target.value)
                         }
-                        value={this.state.item.total_price || ''}
+                        value={this.state.item.tax_amount || ''}
+                    />
+                </td>
+                <td>
+                    <AcqInvoiceLineItemCalc
+                        propName="total_price"
+                        handleChange={this.handleChange}
+                        item={this.state.item}
+                        calc={this.props.calc}
                     />
                 </td>
                 <td>
