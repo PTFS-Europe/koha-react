@@ -4,6 +4,7 @@ import withApiData from './../hoc/withApiData';
 import AcqInvoiceLineItemView from './AcqInvoiceLineItem/AcqInvoiceLineItemView';
 import AcqInvoiceLineItemEditable from './AcqInvoiceLineItem/AcqInvoiceLineItemEditable';
 import Calc from '../helper/calc';
+import EditingContext from '../helper/EditingContext';
 
 class AcqInvoiceLineitemsTable extends Component {
     state = {
@@ -27,7 +28,12 @@ class AcqInvoiceLineitemsTable extends Component {
     };
     render() {
         return (
-            <div>
+            <EditingContext.Provider
+                value={{
+                    editing: this.state.editing,
+                    setEditing: this.setEditing
+                }}
+            >
                 <table>
                     <thead>
                         <tr>
@@ -50,7 +56,6 @@ class AcqInvoiceLineitemsTable extends Component {
                                     <AcqInvoiceLineItemEditable
                                         calc={Calc}
                                         handleChange={this.props.handleChange}
-                                        editing={this.state.editing}
                                         key={item.id}
                                         item={item}
                                         save={this.save}
@@ -61,8 +66,6 @@ class AcqInvoiceLineitemsTable extends Component {
                                 return (
                                     <AcqInvoiceLineItemView
                                         calc={Calc}
-                                        setEditing={this.setEditing}
-                                        editing={this.state.editing}
                                         key={item.id}
                                         delete={this.props.delete}
                                         item={item}
@@ -89,7 +92,7 @@ class AcqInvoiceLineitemsTable extends Component {
                 <button disabled={this.state.editing} onClick={this.add}>
                     Add new
                 </button>
-            </div>
+            </EditingContext.Provider>
         );
     }
 }
