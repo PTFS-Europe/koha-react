@@ -43,7 +43,7 @@ class AcqInvoiceLineitemsTable extends Component {
                             <th>List price</th>
                             <th>Discount %</th>
                             <th>Your price</th>
-                            <th>Tax rate</th>
+                            <th>Tax rate %</th>
                             <th>Tax amount</th>
                             <th>Total</th>
                             <th>&nbsp;</th>

@@ -63,7 +63,7 @@ class AcqInvoiceLineItemEditable extends Component {
                 </td>
                 <td>
                     <input
-                        placeholder="Tax rate (%)"
+                        placeholder="Tax rate"
                         type="number"
                         onChange={event =>
                             this.handleChange('tax_rate', event.target.value)
