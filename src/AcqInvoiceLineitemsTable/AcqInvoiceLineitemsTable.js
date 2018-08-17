@@ -6,7 +6,7 @@ import AcqInvoiceLineItemEditable from './AcqInvoiceLineItem/AcqInvoiceLineItemE
 import Calc from '../helper/calc';
 import EditingContext from '../helper/EditingContext';
 
-class AcqInvoiceLineitemsTable extends Component {
+export class AcqInvoiceLineitemsTable extends Component {
     state = {
         editing: null
     };
@@ -34,7 +34,7 @@ class AcqInvoiceLineitemsTable extends Component {
                     setEditing: this.setEditing
                 }}
             >
-                <table>
+                <table id="react-acq-lineitems-table">
                     <thead>
                         <tr>
                             <th>Description</th>
@@ -89,7 +89,11 @@ class AcqInvoiceLineitemsTable extends Component {
                         </tr>
                     </tbody>
                 </table>
-                <button disabled={this.state.editing} onClick={this.add}>
+                <button
+                    id="react-acq-lineitems-button-add-new"
+                    disabled={this.state.editing}
+                    onClick={this.add}
+                >
                     Add new
                 </button>
             </EditingContext.Provider>
