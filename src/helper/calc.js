@@ -1,4 +1,4 @@
-const isNum = val => !isNaN(parseFloat(val));
+const isNum = val => typeof val === 'number' && !isNaN(parseFloat(val));
 
 const getTotal = (items, column) => {
     let total = 0;
@@ -11,21 +11,29 @@ const getTotal = (items, column) => {
 };
 const list_price = item => {
     if (isNum(item.discount_rate) && isNum(item.pre_tax_amount)) {
-        return item.pre_tax_amount * ((100 + item.discount_rate) / 100);
+        const nonFltAmt = item.pre_tax_amount * 100;
+        const res = nonFltAmt * ((100 + item.discount_rate) / 100);
+        return res / 100;
     } else {
         return false;
     }
 };
 const discount_rate = item => {
     if (isNum(item.list_price) && isNum(item.pre_tax_amount)) {
-        return (1 - item.pre_tax_amount / item.list_price) * 100;
+        const nonFltListPrice = item.list_price * 100;
+        const nonFltPreTaxAmount = item.pre_tax_amount * 100;
+        const res = 100 - (nonFltPreTaxAmount / nonFltListPrice) * 100;
+        return res / 100;
     } else {
         return false;
     }
 };
 const pre_tax_amount = item => {
     if (isNum(item.list_price) && isNum(item.discount_rate)) {
-        return item.list_price - item.list_price * (item.discount_rate / 100);
+        const nonFltListPrice = item.list_price * 100;
+        const res =
+            nonFltListPrice - (nonFltListPrice * item.discount_rate) / 100;
+        return res / 100;
     } else if (isNum(item.list_price)) {
         return item.list_price;
     } else {
@@ -37,17 +45,22 @@ const total_price = item => {
         isNum(item.pre_tax_amount) && item.pre_tax_amount > 0
             ? item.pre_tax_amount
             : pre_tax_amount(item);
+    const useAmount = amount * 100;
+    const useTaxAmount = item.tax_amount * 100;
     if (isNum(item.tax_rate) && isNum(item.tax_amount)) {
         return false;
-    } else if (isNum(amount) && isNum(item.tax_rate)) {
-        return amount * ((item.tax_rate + 100) / 100);
-    } else if (isNum(amount) && isNum(item.tax_amount)) {
-        return amount + item.tax_amount;
+    } else if (isNum(useAmount) && isNum(item.tax_rate)) {
+        const res = useAmount * ((item.tax_rate + 100) / 100);
+        return res / 100;
+    } else if (isNum(useAmount) && isNum(useTaxAmount)) {
+        const res = useAmount + useTaxAmount;
+        return res / 100;
     } else {
         return amount;
     }
 };
 export default {
+    isNum,
     getTotal,
     list_price,
     discount_rate,
