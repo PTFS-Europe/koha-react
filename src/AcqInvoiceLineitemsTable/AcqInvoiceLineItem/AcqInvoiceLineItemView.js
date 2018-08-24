@@ -6,7 +6,9 @@ import AcqInvoiceLineItemCalc from './AcqInvoiceLineItemCalc';
 const AcqInvoiceLineItem = props => {
     return (
         <tr>
-            <td>{props.item.description || ''}</td>
+            <td className="react-acq-lineitem-description">
+                {props.item.description || ''}
+            </td>
             <td>**Type goes here**</td>
             <td>**Fund goes here**</td>
             <td>
@@ -33,8 +35,12 @@ const AcqInvoiceLineItem = props => {
                     calc={props.calc}
                 />
             </td>
-            <td>{props.item.tax_rate || ''}</td>
-            <td>{props.item.tax_amount || ''}</td>
+            <td className="react-acq-lineitem-tax_rate">
+                {props.item.tax_rate || ''}
+            </td>
+            <td className="react-acq-lineitem-tax_amount">
+                {props.item.tax_amount || ''}
+            </td>
             <td>
                 <AcqInvoiceLineItemCalc
                     disp
