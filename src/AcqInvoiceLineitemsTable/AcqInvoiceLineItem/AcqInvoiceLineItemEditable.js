@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import AcqLineItemActions from './AcqInvoiceLineItemActions/AcqInvoiceLineItemActions';
 import AcqInvoiceLineItemCalc from './AcqInvoiceLineItemCalc';
 
-class AcqInvoiceLineItemEditable extends Component {
+export class AcqInvoiceLineItemEditable extends Component {
     state = {
         item: {},
         calculated: {}
@@ -27,6 +27,7 @@ class AcqInvoiceLineItemEditable extends Component {
             <tr>
                 <td>
                     <input
+                        className="react-acq-lineitem-edit-description"
                         placeholder="Item description"
                         type="text"
                         onChange={event =>
@@ -63,6 +64,7 @@ class AcqInvoiceLineItemEditable extends Component {
                 </td>
                 <td>
                     <input
+                        className="react-acq-lineitem-edit-tax_rate"
                         placeholder="Tax rate"
                         type="number"
                         onChange={event =>
@@ -73,6 +75,7 @@ class AcqInvoiceLineItemEditable extends Component {
                 </td>
                 <td>
                     <input
+                        className="react-acq-lineitem-edit-tax_amount"
                         placeholder="Tax amount"
                         type="number"
                         onChange={event =>
