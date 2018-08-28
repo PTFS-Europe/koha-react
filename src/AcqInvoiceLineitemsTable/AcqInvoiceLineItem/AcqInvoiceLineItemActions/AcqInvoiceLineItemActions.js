@@ -7,8 +7,9 @@ const AcqInvoiceLineItemActions = props => {
         <EditingContext.Consumer>
             {({ editing, setEditing }) => {
                 return editing !== props.item.id ? (
-                    <div>
+                    <div className="react-acq-lineitem-disp-actions">
                         <button
+                            className="react-acq-lineitem-disp-actions-delete"
                             disabled={
                                 props.editing && props.editing !== props.item.id
                             }
@@ -17,6 +18,7 @@ const AcqInvoiceLineItemActions = props => {
                             Delete
                         </button>
                         <button
+                            className="react-acq-lineitem-disp-actions-edit"
                             disabled={
                                 props.editing && props.editing !== props.item.id
                             }
@@ -26,11 +28,19 @@ const AcqInvoiceLineItemActions = props => {
                         </button>
                     </div>
                 ) : (
-                    <div>
-                        <button onClick={() => props.save(props.item.id)}>
+                    <div className="react-acq-lineitem-edit-actions">
+                        <button
+                            className="react-acq-lineitem-disp-actions-save"
+                            onClick={() => props.save(props.item.id)}
+                        >
                             Save
                         </button>
-                        <button onClick={() => props.cancel()}>Cancel</button>
+                        <button
+                            className="react-acq-lineitem-disp-actions-cancel"
+                            onClick={() => props.cancel()}
+                        >
+                            Cancel
+                        </button>
                     </div>
                 );
             }}
