@@ -24,7 +24,7 @@ const AcqInvoiceLineItemCalc = props => {
     };
     if (props.disp) {
         return (
-            <div>
+            <div className="react-acq-lineitem-disp-calculated">
                 {!isNaN(parseFloat(getVal()).toFixed(2))
                     ? parseFloat(getVal()).toFixed(2)
                     : ''}
@@ -38,7 +38,7 @@ const AcqInvoiceLineItemCalc = props => {
         );
     } else {
         return (
-            <div>
+            <div className="react-acq-lineitem-edit-calculated">
                 <input
                     type="number"
                     onChange={event =>
