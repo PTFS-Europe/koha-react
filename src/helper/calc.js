@@ -1,13 +1,11 @@
 const isNum = val => typeof val === 'number' && !isNaN(parseFloat(val));
 
 const getTotal = (items, column) => {
-    let total = 0;
-    items.forEach(i => {
-        if (i.hasOwnProperty(column) && i[column] > 0) {
-            total += parseFloat(i[column]);
-        }
-    });
-    return total;
+    return items.reduce((acc, curr) => {
+        return curr.hasOwnProperty(column) && curr[column] > 0
+            ? acc + parseFloat(curr[column])
+            : 0;
+    }, 0);
 };
 const list_price = item => {
     if (isNum(item.discount_rate) && isNum(item.pre_tax_amount)) {
