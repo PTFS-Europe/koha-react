@@ -73,20 +73,17 @@ export class AcqInvoiceLineitemsTable extends Component {
                                 );
                             }
                         })}
-                        <tr>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>
-                                {Calc.getTotal(this.props.items, 'total_price')}
-                            </td>
-                            <td>&nbsp;</td>
-                        </tr>
+                        {!this.state.editing && (
+                            <tr>
+                                <td colSpan="8">&nbsp;</td>
+                                <td colSpan="2">
+                                    {Calc.getTotal(
+                                        this.props.items,
+                                        'total_price'
+                                    ).toFixed(2)}
+                                </td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
                 <button

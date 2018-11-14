@@ -29,6 +29,20 @@ describe('calc.js', () => {
             tax_rate: 20,
             tax_amount: null,
             total_price: null
+        },
+        {
+            id: 7,
+            invoice: 5,
+            order: 4,
+            description: 'This is yet another item description',
+            quantity: 1,
+            list_price: 10.0,
+            discount_rate: null,
+            discount_amount: null,
+            pre_tax_amount: null,
+            tax_rate: 20,
+            tax_amount: null,
+            total_price: 12.0
         }
     ];
     it('isNum should only return true when passed a number', () => {
@@ -42,8 +56,8 @@ describe('calc.js', () => {
         expect(calc.isNum({})).toBe(false);
     });
 
-    it('getTotal should take an array of objects and a property name and return the sum of the values of the property', () => {
-        expect(calc.getTotal(items, 'list_price')).toBe(37.98);
+    it('getTotal should take an array of items and return the sum of the totals for each item, calculated or otherwise', () => {
+        expect(calc.getTotal(items, 'list_price')).toBe(53.379);
     });
 
     it('list_price should take an item and return the list_price calculated from the discount_rate and pre_tax_amount', () => {

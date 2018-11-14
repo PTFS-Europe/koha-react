@@ -1,10 +1,16 @@
 const isNum = val => typeof val === 'number' && !isNaN(parseFloat(val));
 
-const getTotal = (items, column) => {
+const getTotal = items => {
     return items.reduce((acc, curr) => {
-        return curr.hasOwnProperty(column) && curr[column] > 0
-            ? acc + parseFloat(curr[column])
-            : 0;
+        if (
+            curr.hasOwnProperty('total_price') &&
+            curr.total_price &&
+            curr.total_price > 0
+        ) {
+            return acc + parseFloat(curr.total_price);
+        } else {
+            return acc + parseFloat(total_price(curr));
+        }
     }, 0);
 };
 const list_price = item => {
