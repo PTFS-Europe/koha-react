@@ -94,7 +94,7 @@ export class AcqInvoiceLineItemEditable extends Component {
                 </td>
                 <td>
                     <AcqLineItemActions
-                        save={() => this.props.save(this.state.item)}
+                        save={this.props.save}
                         cancel={this.props.cancel}
                         editing={this.props.editing}
                         item={this.state.item}
