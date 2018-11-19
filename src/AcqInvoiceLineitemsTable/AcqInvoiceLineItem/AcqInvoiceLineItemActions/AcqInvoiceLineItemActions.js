@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 import EditingContext from '../../../helper/EditingContext';
 
-const AcqInvoiceLineItemActions = props => {
-    const deleteConfirm = id => {
+export class AcqInvoiceLineItemActions extends Component {
+    state = {
+        inProgress: false
+    };
+    deleteConfirm(id) {
         confirmAlert({
             title: 'Delete line item',
             message: 'Are you sure you want to delete?',
@@ -13,7 +16,11 @@ const AcqInvoiceLineItemActions = props => {
                 {
                     label: 'Yes',
                     onClick: () => {
-                        props.delete(id).catch(msg => showError(msg));
+                        this.setState({ inProgress: true });
+                        this.props
+                            .delete(id)
+                            .catch(msg => this.showError(msg))
+                            .then(() => this.setState({ inProgress: false }));
                     }
                 },
                 {
@@ -24,8 +31,8 @@ const AcqInvoiceLineItemActions = props => {
                 }
             ]
         });
-    };
-    const showError = msg => {
+    }
+    showError(msg) {
         confirmAlert({
             title: 'Error',
             message: 'Unable to carry out action: ' + msg,
@@ -36,58 +43,79 @@ const AcqInvoiceLineItemActions = props => {
                 }
             ]
         });
-    };
-    return (
-        <EditingContext.Consumer>
-            {({ editing, setEditing }) => {
-                return editing !== props.item.id ? (
-                    <div className="react-acq-lineitem-disp-actions">
-                        <button
-                            type="button"
-                            className="react-acq-lineitem-disp-actions-delete"
-                            disabled={
-                                props.editing && props.editing !== props.item.id
-                            }
-                            onClick={() => deleteConfirm(props.item.id)}
-                        >
-                            Delete
-                        </button>
-                        <button
-                            type="button"
-                            className="react-acq-lineitem-disp-actions-edit"
-                            disabled={
-                                props.editing && props.editing !== props.item.id
-                            }
-                            onClick={() => setEditing(props.item.id)}
-                        >
-                            Edit
-                        </button>
-                    </div>
-                ) : (
-                    <div className="react-acq-lineitem-edit-actions">
-                        <button
-                            type="button"
-                            className="react-acq-lineitem-disp-actions-save"
-                            onClick={() =>
-                                props
-                                    .save(props.item)
-                                    .catch(msg => showError(msg))
-                            }
-                        >
-                            Save
-                        </button>
-                        <button
-                            type="button"
-                            className="react-acq-lineitem-disp-actions-cancel"
-                            onClick={() => props.cancel(props.item.id)}
-                        >
-                            Cancel
-                        </button>
-                    </div>
-                );
-            }}
-        </EditingContext.Consumer>
-    );
-};
+    }
+    save(item) {
+        this.setState({
+            inProgress: true
+        });
+        return this.props.save(item);
+    }
+    render() {
+        return (
+            <EditingContext.Consumer>
+                {({ editing, setEditing }) => {
+                    return editing !== this.props.item.id ? (
+                        <div className="react-acq-lineitem-disp-actions">
+                            <button
+                                type="button"
+                                className="react-acq-lineitem-disp-actions-delete"
+                                disabled={
+                                    (this.props.editing &&
+                                        this.props.editing !==
+                                            this.props.item.id) ||
+                                    this.state.inProgress
+                                }
+                                onClick={() =>
+                                    this.deleteConfirm(this.props.item.id)
+                                }
+                            >
+                                {this.state.inProgress
+                                    ? 'Deleting...'
+                                    : 'Delete'}
+                            </button>
+                            <button
+                                type="button"
+                                className="react-acq-lineitem-disp-actions-edit"
+                                disabled={
+                                    this.props.editing &&
+                                    this.props.editing !== this.props.item.id
+                                }
+                                onClick={() => setEditing(this.props.item.id)}
+                            >
+                                Edit
+                            </button>
+                        </div>
+                    ) : (
+                        <div className="react-acq-lineitem-edit-actions">
+                            <button
+                                disabled={this.state.inProgress}
+                                type="button"
+                                className="react-acq-lineitem-disp-actions-save"
+                                onClick={() =>
+                                    this.save(this.props.item)
+                                        .catch(msg => this.showError(msg))
+                                        .then(() =>
+                                            this.setState({ inProgress: false })
+                                        )
+                                }
+                            >
+                                {this.state.inProgress ? 'Saving...' : 'Save'}
+                            </button>
+                            <button
+                                type="button"
+                                className="react-acq-lineitem-disp-actions-cancel"
+                                onClick={() =>
+                                    this.props.cancel(this.props.item.id)
+                                }
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    );
+                }}
+            </EditingContext.Consumer>
+        );
+    }
+}
 
 export default AcqInvoiceLineItemActions;
