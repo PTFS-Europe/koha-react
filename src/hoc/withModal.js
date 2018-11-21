@@ -20,6 +20,7 @@ export default function withModal(Wrapped) {
             this.setState({
                 title: '',
                 msg: '',
+                btnText: '',
                 confirm: null,
                 display: false
             });
@@ -29,6 +30,7 @@ export default function withModal(Wrapped) {
             this.setState({
                 title: params.title,
                 msg: params.msg,
+                btnText: params.btnText,
                 confirm: params.confirm ? params.confirm : null,
                 display: true
             });
@@ -62,10 +64,11 @@ export default function withModal(Wrapped) {
                             </Button>
                             {this.state.confirm && (
                                 <Button
+                                    bsStyle="danger"
                                     variant="error"
                                     onClick={() => this.doConfirm()}
                                 >
-                                    Delete
+                                    {this.state.btnText}
                                 </Button>
                             )}
                         </Modal.Footer>

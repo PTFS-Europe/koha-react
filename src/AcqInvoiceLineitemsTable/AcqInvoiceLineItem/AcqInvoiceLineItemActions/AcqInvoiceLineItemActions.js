@@ -58,6 +58,7 @@ export class AcqInvoiceLineItemActions extends Component {
                                         this.props.showModal({
                                             title: 'Delete line item',
                                             msg: 'Are you sure?',
+                                            btnText: 'Delete',
                                             confirm: this.delete
                                         })
                                     }
