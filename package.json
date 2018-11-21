@@ -5,13 +5,13 @@
     "dependencies": {
         "axios": "^0.18.0",
         "react": "^16.6.3",
-        "react-confirm-alert": "^2.0.6",
+        "react-bootstrap": "^0.32.4",
         "react-dom": "^16.6.3",
         "react-scripts": "1.1.4"
     },
     "scripts": {
         "start": "react-scripts start",
-        "build": "react-scripts build && cp build/static/js/main.*.js ~/kohaclone/koha-tmpl/intranet-tmpl/prog/js/react-orderreceive-lineitems.js && cp build/static/css/main.*.css ~/kohaclone/koha-tmpl/intranet-tmpl/prog/css/react-orderreceive-lineitems.css",
+        "build": "react-scripts build && cp build/static/js/main.*.js ~/kohaclone/koha-tmpl/intranet-tmpl/prog/js/react-orderreceive-lineitems.js",
         "test": "react-scripts test --env=jsdom",
         "eject": "react-scripts eject"
     },
