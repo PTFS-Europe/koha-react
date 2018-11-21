@@ -43,52 +43,47 @@ export class AcqInvoiceLineItemActions extends Component {
             <EditingContext.Consumer>
                 {({ editing, setEditing }) => {
                     return editing !== this.props.item.id ? (
-                        <div>
-                            <div className="react-acq-lineitem-disp-actions">
-                                <button
-                                    type="button"
-                                    className="react-acq-lineitem-disp-actions-delete"
-                                    disabled={
-                                        (this.props.editing &&
-                                            this.props.editing !==
-                                                this.props.item.id) ||
-                                        this.state.inProgress
-                                    }
-                                    onClick={() =>
-                                        this.props.showModal({
-                                            title: 'Delete line item',
-                                            msg: 'Are you sure?',
-                                            btnText: 'Delete',
-                                            confirm: this.delete
-                                        })
-                                    }
-                                >
-                                    {this.state.inProgress
-                                        ? 'Deleting...'
-                                        : 'Delete'}
-                                </button>
-                                <button
-                                    type="button"
-                                    className="react-acq-lineitem-disp-actions-edit"
-                                    disabled={
-                                        this.props.editing &&
+                        <div id="react-acq-lineitem-disp-actions">
+                            <button
+                                type="button"
+                                className="react-acq-lineitem-disp-actions-delete"
+                                disabled={
+                                    (this.props.editing &&
                                         this.props.editing !==
-                                            this.props.item.id
-                                    }
-                                    onClick={() =>
-                                        setEditing(this.props.item.id)
-                                    }
-                                >
-                                    Edit
-                                </button>
-                            </div>
+                                            this.props.item.id) ||
+                                    this.state.inProgress
+                                }
+                                onClick={() =>
+                                    this.props.showModal({
+                                        title: 'Delete line item',
+                                        msg: 'Are you sure?',
+                                        btnText: 'Delete',
+                                        confirm: this.delete
+                                    })
+                                }
+                            >
+                                {this.state.inProgress
+                                    ? 'Deleting...'
+                                    : 'Delete'}
+                            </button>
+                            <button
+                                type="button"
+                                className="react-acq-lineitem-disp-actions-edit"
+                                disabled={
+                                    this.props.editing &&
+                                    this.props.editing !== this.props.item.id
+                                }
+                                onClick={() => setEditing(this.props.item.id)}
+                            >
+                                Edit
+                            </button>
                         </div>
                     ) : (
-                        <div className="react-acq-lineitem-edit-actions">
+                        <div id="react-acq-lineitem-edit-actions">
                             <button
                                 disabled={this.state.inProgress}
                                 type="button"
-                                className="react-acq-lineitem-disp-actions-save"
+                                className="react-acq-lineitem-edit-actions-save"
                                 onClick={() => this.save(this.props.item)}
                             >
                                 {this.state.inProgress ? 'Saving...' : 'Save'}

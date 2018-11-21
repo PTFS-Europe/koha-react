@@ -38,9 +38,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                 }}
             >
                 {this.props.loading && (
-                    <div>
-                        <span>Loading...</span>
-                    </div>
+                    <div id="react-acq-lineitems-loading">Loading...</div>
                 )}
                 {!this.props.loading && (
                     <div>
@@ -96,15 +94,19 @@ export class AcqInvoiceLineitemsTable extends Component {
                                         </td>
                                     </tr>
                                 )}
+                                <tr>
+                                    <td colspan="10">
+                                        <button
+                                            id="react-acq-lineitems-button-add-new"
+                                            disabled={this.state.editing}
+                                            onClick={this.add}
+                                        >
+                                            Add new
+                                        </button>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
-                        <button
-                            id="react-acq-lineitems-button-add-new"
-                            disabled={this.state.editing}
-                            onClick={this.add}
-                        >
-                            Add new
-                        </button>
                     </div>
                 )}
             </EditingContext.Provider>
