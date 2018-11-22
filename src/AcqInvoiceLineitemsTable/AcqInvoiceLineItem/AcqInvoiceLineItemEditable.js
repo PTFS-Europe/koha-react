@@ -26,9 +26,8 @@ export class AcqInvoiceLineItemEditable extends Component {
     render() {
         return (
             <tr>
-                <td>
+                <td id="react-acq-lineitem-edit-description">
                     <input
-                        className="react-acq-lineitem-edit-description"
                         placeholder="Item description"
                         type="text"
                         onChange={event =>
@@ -37,15 +36,15 @@ export class AcqInvoiceLineItemEditable extends Component {
                         value={this.state.item.description || ''}
                     />
                 </td>
-                <td>**Type goes here**</td>
-                <td>
+                <td id="react-acq-lineitem-edit-type">**Type goes here</td>
+                <td id="react-acq-lineitem-edit-budget">
                     <AcqInvoiceFunds
                         funds={this.props.funds}
                         selected={this.state.item.budget}
                         handleChange={this.handleChange}
                     />
                 </td>
-                <td>
+                <td id="react-acq-lineitem-edit-list_price">
                     <AcqInvoiceLineItemCalc
                         propName="list_price"
                         handleChange={this.handleChange}
@@ -53,7 +52,7 @@ export class AcqInvoiceLineItemEditable extends Component {
                         calc={this.props.calc}
                     />
                 </td>
-                <td>
+                <td id="react-acq-lineitem-edit-discount_rate">
                     <AcqInvoiceLineItemCalc
                         propName="discount_rate"
                         handleChange={this.handleChange}
@@ -61,7 +60,7 @@ export class AcqInvoiceLineItemEditable extends Component {
                         calc={this.props.calc}
                     />
                 </td>
-                <td>
+                <td id="react-acq-lineitem-edit-pre_tax_amount">
                     <AcqInvoiceLineItemCalc
                         propName="pre_tax_amount"
                         handleChange={this.handleChange}
@@ -69,9 +68,8 @@ export class AcqInvoiceLineItemEditable extends Component {
                         calc={this.props.calc}
                     />
                 </td>
-                <td>
+                <td id="react-acq-lineitem-edit-tax_rate">
                     <input
-                        className="react-acq-lineitem-edit-tax_rate"
                         placeholder="Tax rate"
                         type="number"
                         onChange={event =>
@@ -80,9 +78,8 @@ export class AcqInvoiceLineItemEditable extends Component {
                         value={this.state.item.tax_rate || ''}
                     />
                 </td>
-                <td>
+                <td id="react-acq-lineitem-edit-tax_amount">
                     <input
-                        className="react-acq-lineitem-edit-tax_amount"
                         placeholder="Tax amount"
                         type="number"
                         onChange={event =>
@@ -91,7 +88,7 @@ export class AcqInvoiceLineItemEditable extends Component {
                         value={this.state.item.tax_amount || ''}
                     />
                 </td>
-                <td>
+                <td id="react-acq-lineitem-edit-total_price">
                     <AcqInvoiceLineItemCalc
                         propName="total_price"
                         handleChange={this.handleChange}
@@ -99,7 +96,7 @@ export class AcqInvoiceLineItemEditable extends Component {
                         calc={this.props.calc}
                     />
                 </td>
-                <td>
+                <td id="react-acq-lineitem-edit-actions">
                     <AcqLineItemActions
                         save={this.props.save}
                         cancel={this.props.cancel}
