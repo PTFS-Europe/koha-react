@@ -3,11 +3,11 @@ import React from 'react';
 const AcqInvoiceLineItemCalc = props => {
     // Is the field calculated
     const isCalc = () => {
-        return (
-            (!props.item[props.propName] ||
-                props.item[props.propName].toString().length === 0) &&
+        return (!props.item[props.propName] ||
+            props.item[props.propName].toString().length === 0) &&
             props.calc[props.propName](props.item)
-        );
+            ? true
+            : false;
     };
     // Get the field's value
     const getVal = () => {
