@@ -97,7 +97,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                                     </tr>
                                 )}
                                 <tr>
-                                    <td colspan="10">
+                                    <td colSpan="10">
                                         <button
                                             id="react-acq-lineitems-button-add-new"
                                             disabled={this.state.editing}
