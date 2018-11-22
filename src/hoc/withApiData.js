@@ -2,36 +2,19 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default function withApi(Wrapped) {
-    const base =
-        'http://aidev.rebus.ptfsadmin.uk0.bigv.io:8080/api/v1/acquisitions/invoices/';
+    const base = 'http://aidev.rebus.ptfsadmin.uk0.bigv.io:8080/api/v1';
     return class extends Component {
         constructor(props) {
             super(props);
             this.state = {
                 items: [],
+                funds: [],
                 loading: false,
                 error: null
             };
         }
 
         componentDidMount() {
-            this.populate = () => {
-                var url = base + this.state.invoiceId + '/lines';
-                const params = this.state.orderNumber
-                    ? { order_id: this.state.orderNumber }
-                    : {};
-                axios
-                    .get(url, { params })
-                    .then(response => {
-                        this.setState({ items: response.data });
-                    })
-                    .catch(error => {
-                        if (error.response) {
-                            this.setState({ error: error.response.data });
-                        }
-                    })
-                    .then(() => this.setState({ loading: false }));
-            };
             // Initial population
             this.setState(
                 {
@@ -44,6 +27,51 @@ export default function withApi(Wrapped) {
                 () => this.populate()
             );
         }
+
+        populate = () => {
+            this.populateLines();
+            this.populateFunds();
+        };
+
+        populateLines = () => {
+            var url =
+                base +
+                '/acquisitions/invoices/' +
+                this.state.invoiceId +
+                '/lines';
+            const params = this.state.orderNumber
+                ? { order_id: this.state.orderNumber }
+                : {};
+            return axios
+                .get(url, { params })
+                .then(response => {
+                    this.setState({ items: response.data });
+                })
+                .catch(error => {
+                    if (error.response) {
+                        this.setState({ error: error.response.data });
+                    }
+                })
+                .then(() => this.setState({ loading: false }));
+        };
+
+        populateFunds = () => {
+            var url = base + '/acquisitions/funds';
+            return axios
+                .get(url)
+                .then(response => {
+                    this.setState({
+                        funds: response.data.sort((a, b) =>
+                            a.fund_name.localeCompare(b.fund_name)
+                        )
+                    });
+                })
+                .catch(error => {
+                    if (error.response) {
+                        this.setState({ error: error.response.data });
+                    }
+                });
+        };
 
         saveItem = item => {
             const url = base + this.state.invoiceId + '/lines';
@@ -108,6 +136,20 @@ export default function withApi(Wrapped) {
                 });
         };
 
+        sortReturn = (inp, prop) => {
+            return inp.sort((a, b) => {
+                const valA = a[prop].toUpperCase;
+                const valB = b[prop].toUpperCase;
+                if (valA < valB) {
+                    return -1;
+                }
+                if (valA > valB) {
+                    return 1;
+                }
+                return 0;
+            });
+        };
+
         render() {
             return (
                 <Wrapped
@@ -117,6 +159,7 @@ export default function withApi(Wrapped) {
                     delete={this.deleteItem}
                     deleteFromModel={this.deleteFromModel}
                     items={this.state.items}
+                    funds={this.state.funds}
                     loading={this.state.loading}
                     error={this.state.error}
                     {...this.props}

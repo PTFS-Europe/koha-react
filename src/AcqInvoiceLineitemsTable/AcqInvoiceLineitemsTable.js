@@ -68,6 +68,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                                                 }
                                                 key={item.id}
                                                 item={item}
+                                                funds={this.props.funds}
                                                 save={this.save}
                                                 cancel={this.cancelEdit}
                                             />
@@ -79,6 +80,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                                                 key={item.id}
                                                 delete={this.props.delete}
                                                 item={item}
+                                                funds={this.props.funds}
                                             />
                                         );
                                     }

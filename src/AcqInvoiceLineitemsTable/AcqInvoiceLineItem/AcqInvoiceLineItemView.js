@@ -10,7 +10,12 @@ const AcqInvoiceLineItem = props => {
                 {props.item.description || ''}
             </td>
             <td>**Type goes here**</td>
-            <td>**Fund goes here**</td>
+            <td>
+                {props.funds && props.funds.length
+                    ? props.funds.find(f => f.fund_id === props.item.budget)
+                          .fund_name
+                    : ''}
+            </td>
             <td>
                 <AcqInvoiceLineItemCalc
                     disp
