@@ -9,7 +9,12 @@ const AcqInvoiceLineItem = props => {
             <td className="react-acq-lineitem-description">
                 {props.item.description || ''}
             </td>
-            <td>**Type goes here**</td>
+            <td>
+                {props.types && props.types.length
+                    ? props.types.find(t => t.id === props.item.item_type)
+                          .authorised_value
+                    : ''}
+            </td>
             <td>
                 {props.funds && props.funds.length
                     ? props.funds.find(f => f.fund_id === props.item.budget)

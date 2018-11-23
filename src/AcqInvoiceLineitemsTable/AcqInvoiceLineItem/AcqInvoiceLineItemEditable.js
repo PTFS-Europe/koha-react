@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import AcqLineItemActions from './AcqInvoiceLineItemActions/AcqInvoiceLineItemActions';
 import AcqInvoiceLineItemCalc from './AcqInvoiceLineItemCalc';
 import AcqInvoiceFunds from '../AcqInvoiceFunds';
+import AcqInvoiceLineItemTypes from './AcqInvoiceLineItemTypes';
 
 export class AcqInvoiceLineItemEditable extends Component {
     state = {
@@ -36,7 +37,13 @@ export class AcqInvoiceLineItemEditable extends Component {
                         value={this.state.item.description || ''}
                     />
                 </td>
-                <td id="react-acq-lineitem-edit-type">**Type goes here</td>
+                <td id="react-acq-lineitem-edit-type">
+                    <AcqInvoiceLineItemTypes
+                        types={this.props.types}
+                        selected={this.state.item.item_type}
+                        handleChange={this.handleChange}
+                    />
+                </td>
                 <td id="react-acq-lineitem-edit-budget">
                     <AcqInvoiceFunds
                         funds={this.props.funds}

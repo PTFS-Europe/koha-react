@@ -9,6 +9,7 @@ export default function withApi(Wrapped) {
             this.state = {
                 items: [],
                 funds: [],
+                types: [],
                 loading: false,
                 error: null
             };
@@ -31,6 +32,7 @@ export default function withApi(Wrapped) {
         populate = () => {
             this.populateLines();
             this.populateFunds();
+            this.populateTypes();
         };
 
         populateLines = () => {
@@ -63,6 +65,24 @@ export default function withApi(Wrapped) {
                     this.setState({
                         funds: response.data.sort((a, b) =>
                             a.fund_name.localeCompare(b.fund_name)
+                        )
+                    });
+                })
+                .catch(error => {
+                    if (error.response) {
+                        this.setState({ error: error.response.data });
+                    }
+                });
+        };
+
+        populateTypes = () => {
+            var url = base + '/acquisitions/invoices/lines/types';
+            return axios
+                .get(url)
+                .then(response => {
+                    this.setState({
+                        types: response.data.sort((a, b) =>
+                            a.authorised_value.localeCompare(b.authorised_value)
                         )
                     });
                 })
@@ -136,20 +156,6 @@ export default function withApi(Wrapped) {
                 });
         };
 
-        sortReturn = (inp, prop) => {
-            return inp.sort((a, b) => {
-                const valA = a[prop].toUpperCase;
-                const valB = b[prop].toUpperCase;
-                if (valA < valB) {
-                    return -1;
-                }
-                if (valA > valB) {
-                    return 1;
-                }
-                return 0;
-            });
-        };
-
         render() {
             return (
                 <Wrapped
@@ -160,6 +166,7 @@ export default function withApi(Wrapped) {
                     deleteFromModel={this.deleteFromModel}
                     items={this.state.items}
                     funds={this.state.funds}
+                    types={this.state.types}
                     loading={this.state.loading}
                     error={this.state.error}
                     {...this.props}
