@@ -9,13 +9,17 @@ const AcqInvoiceLineItemTypes = props => {
             value={props.selected}
             name="item_type"
         >
-            {props.types.map(t => {
-                return (
-                    <option key={t.id} value={t.id}>
-                        {t.authorised_value}
-                    </option>
-                );
-            })}
+            return (
+                <option value=""></option>
+                {props.types.map(t => {
+                    return (
+                        <option key={t.id} value={t.id}>
+                            {t.authorised_value}
+                        </option>
+                    );
+                })}
+            );
+          
         </select>
     );
 };

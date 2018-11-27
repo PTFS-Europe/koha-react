@@ -5,15 +5,16 @@ const AcqInvoiceFunds = props => {
         <select
             onChange={event => props.handleChange('budget', event.target.value)}
             value={props.selected}
-            name="funds"
+            name="budget"
         >
-            {props.funds.map(f => {
-                return (
-                    <option key={f.fund_id} value={f.fund_id}>
-                        {f.fund_name}
-                    </option>
-                );
-            })}
+            return (
+                <option value=""></option>
+                {props.funds.map(f => {
+                        return (<option key={f.fund_id} value={f.fund_id}>
+                            {f.fund_name}
+                        </option>);
+                })}
+            );
         </select>
     );
 };
