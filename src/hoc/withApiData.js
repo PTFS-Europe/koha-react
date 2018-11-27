@@ -21,8 +21,8 @@ export default function withApi(Wrapped) {
                 {
                     loading: true,
                     // TODO: Modify these fallbacks to be null
-                    invoiceId: window.invoiceId ? window.invoiceId : 3,
-                    orderNumber: window.orderNumber ? window.orderNumber : 397
+                    invoiceId: window.invoiceId ? window.invoiceId : null,
+                    orderNumber: window.orderNumber ? window.orderNumber : null
                 },
                 // Ensure population happens after our state has been set
                 () => this.populate()
@@ -94,7 +94,7 @@ export default function withApi(Wrapped) {
         };
 
         saveItem = item => {
-            const url = base + this.state.invoiceId + '/lines';
+            const url = base + '/acquisitions/invoices/' + this.state.invoiceId + '/lines';
             return axios
                 .post(url, item)
                 .then(response => {
@@ -117,8 +117,8 @@ export default function withApi(Wrapped) {
             const itemsCopy = [...this.state.items];
             itemsCopy.push({
                 id: -1,
-                invoice: null,
-                order: null,
+                order_id: window.orderNumber,
+                budget: null,
                 description: '',
                 quantity: null,
                 list_price: null,
