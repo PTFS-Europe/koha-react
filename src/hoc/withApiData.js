@@ -95,6 +95,7 @@ export default function withApi(Wrapped) {
 
         saveItem = item => {
             const url = base + '/acquisitions/invoices/' + this.state.invoiceId + '/lines';
+            item.id = item.id > -1 ? item.id : null;
             return axios
                 .post(url, item)
                 .then(response => {
@@ -140,7 +141,7 @@ export default function withApi(Wrapped) {
         };
 
         deleteItem = id => {
-            const url = base + this.state.invoiceId + '/lines/' + id;
+            const url = base + '/acquisitions/invoices/' + this.state.invoiceId + '/lines/' + id;
             return axios
                 .delete(url)
                 .then(() => {
