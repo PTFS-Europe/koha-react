@@ -93,14 +93,16 @@ export default function withApi(Wrapped) {
                 });
         };
 
-        saveItem = item => {
+        saveItem = itemOrig => {
             const url = base + '/acquisitions/invoices/' + this.state.invoiceId + '/lines';
+            const item = JSON.parse(JSON.stringify(itemOrig));
             item.id = item.id > -1 ? item.id : null;
             return axios
                 .post(url, item)
                 .then(response => {
                     const itemsCopy = [...this.state.items];
-                    const index = itemsCopy.findIndex(i => i.id === item.id);
+                    let index = itemsCopy.findIndex(i => i.id === item.id);
+                    index = index > -1 ? index : itemsCopy.length;
                     itemsCopy.splice(index, 1, response.data);
                     this.setState({ items: itemsCopy });
                 })
