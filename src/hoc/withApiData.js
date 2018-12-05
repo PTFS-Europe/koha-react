@@ -119,7 +119,8 @@ export default function withApi(Wrapped) {
             itemsCopy.push({
                 id: -1,
                 order_id: window.orderNumber,
-                budget: null,
+                budget: '',
+                item_type: '',
                 description: '',
                 quantity: null,
                 list_price: null,
