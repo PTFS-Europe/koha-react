@@ -15,10 +15,12 @@ export class AcqInvoiceLineItemActions extends Component {
         this.props
             .delete(this.props.item.id)
             .catch(msg => {
-                this.props.showModal({
-                    title: 'There was an error',
-                    msg: msg.toString()
-                });
+                if (msg) {
+                    this.props.showModal({
+                        title: 'There was an error',
+                        msg: msg.toString()
+                    });
+                }
             })
             .then(() => this.setState({ inProgress: false }));
     };
@@ -29,12 +31,14 @@ export class AcqInvoiceLineItemActions extends Component {
         });
         this.props
             .save(item)
-            .catch(msg =>
-                this.props.showModal({
-                    title: 'There was an error',
-                    msg: msg.toString()
-                })
-            )
+            .catch(msg => {
+                if (msg) {
+                    this.props.showModal({
+                        title: 'There was an error',
+                        msg: msg.toString()
+                    })
+                }
+            })
             .then(() => this.setState({ inProgress: false }));
     }
 

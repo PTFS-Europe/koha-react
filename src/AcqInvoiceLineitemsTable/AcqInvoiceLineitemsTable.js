@@ -8,7 +8,8 @@ import EditingContext from '../helper/EditingContext';
 
 export class AcqInvoiceLineitemsTable extends Component {
     state = {
-        editing: null
+        editing: null,
+        errors: []
     };
     cancelEdit = id => {
         if (id === -1) {
@@ -20,14 +21,52 @@ export class AcqInvoiceLineitemsTable extends Component {
         if (typeof id === 'undefined') {
             id = null;
         }
-        this.setState({ editing: id });
+        this.setState({
+            editing: id,
+            errors: []
+        });
     };
     save = item => {
-        return this.props.save(item).then(() => this.setEditing());
+        const valid = this.validateItem(item);
+        if (valid) {
+            return this.props.save(item).then(() => this.setEditing());
+        } else {
+            return Promise.reject();
+        }
     };
     add = () => {
         this.props.add();
         this.setEditing(-1);
+    };
+    validateItem = item => {
+        let errors = [];
+        for (let prop in item) {
+            this.validateProperty(prop, item[prop], errors);
+        }
+        this.setState({errors}, () => {
+            return errors.length === 0;
+        });
+    };
+    validateProperty = (property, value, errors) => {
+        switch(property) {
+            case 'description':
+                if (!value || value.length === 0) {
+                    errors.push('You must include a description');
+                }
+                break;
+            case 'item_type':
+                if (!value || value === '') {
+                    errors.push('You must choose an item type');
+                }
+                break;
+            case 'quantity':
+                if (!/\d+/.test(value) || value < 1) {
+                    errors.push('Quantity must be greater than zero');
+                }
+                break;
+            default:
+                break;
+        }
     };
     render() {
         return (
@@ -39,6 +78,15 @@ export class AcqInvoiceLineitemsTable extends Component {
             >
                 {this.props.loading && (
                     <div id="react-acq-lineitems-loading">Loading...</div>
+                )}
+                {this.state.errors.length > 0 && (
+                    <div id="react-acq-lineitems-errors">
+                        <ul>
+                            {this.state.errors.map(error => 
+                                <li key={error}>{error}</li>
+                            )}
+                        </ul>
+                    </div>
                 )}
                 {!this.props.loading && (
                     <div>
