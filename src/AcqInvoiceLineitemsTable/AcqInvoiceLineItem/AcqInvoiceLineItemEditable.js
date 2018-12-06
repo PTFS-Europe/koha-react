@@ -51,6 +51,16 @@ export class AcqInvoiceLineItemEditable extends Component {
                         handleChange={this.handleChange}
                     />
                 </td>
+                <td id="react-acq-lineitem-edit-quantity">
+                    <input
+                        placeholder="Quantity"
+                        type="number"
+                        onChange={event =>
+                            this.handleChange('quantity', event.target.value)
+                        }
+                        value={this.state.item.quantity || ''}
+                    />
+                </td>
                 <td id="react-acq-lineitem-edit-list_price">
                     <AcqInvoiceLineItemCalc
                         propName="list_price"

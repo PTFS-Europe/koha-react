@@ -49,16 +49,17 @@ const total_price = item => {
         isNum(item.pre_tax_amount) && item.pre_tax_amount > 0
             ? item.pre_tax_amount
             : pre_tax_amount(item);
+    const quantity = item.quantity ? item.quantity : 0;
     const useAmount = amount * 100;
     const useTaxAmount = item.tax_amount * 100;
     if (isNum(item.tax_rate) && isNum(item.tax_amount)) {
         return false;
     } else if (isNum(useAmount) && isNum(item.tax_rate)) {
         const res = useAmount * ((item.tax_rate + 100) / 100);
-        return res / 100;
+        return res * quantity / 100;
     } else if (isNum(useAmount) && isNum(useTaxAmount)) {
         const res = useAmount + useTaxAmount;
-        return res / 100;
+        return res * quantity / 100;
     } else {
         return amount;
     }

@@ -48,6 +48,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                                     <th>Description</th>
                                     <th>Type</th>
                                     <th>Fund</th>
+                                    <th>Quantity</th>
                                     <th>List price</th>
                                     <th>Discount %</th>
                                     <th>Your price</th>
