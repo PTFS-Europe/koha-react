@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 export default function withApi(Wrapped) {
-    const base = 'http://aidev.rebus.ptfsadmin.uk0.bigv.io:8080/api/v1';
+    const base = '/api/v1';
     return class extends Component {
         constructor(props) {
             super(props);
@@ -20,7 +20,6 @@ export default function withApi(Wrapped) {
             this.setState(
                 {
                     loading: true,
-                    // TODO: Modify these fallbacks to be null
                     invoiceId: window.invoiceId ? window.invoiceId : null,
                     orderNumber: window.orderNumber ? window.orderNumber : null
                 },
