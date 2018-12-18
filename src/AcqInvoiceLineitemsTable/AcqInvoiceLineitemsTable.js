@@ -81,7 +81,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                     <div id="react-acq-lineitems-loading">Loading...</div>
                 )}
                 {this.state.errors.length > 0 && (
-                    <div id="react-acq-lineitems-errors">
+                    <div id="react-acq-lineitems-errors" className="error">
                         <ul>
                             {this.state.errors.map(error => 
                                 <li key={error}>{error}</li>
