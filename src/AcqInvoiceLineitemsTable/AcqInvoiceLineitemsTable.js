@@ -27,25 +27,26 @@ export class AcqInvoiceLineitemsTable extends Component {
         });
     };
     save = item => {
-        const valid = this.validateItem(item);
-        if (valid) {
-            return this.props.save(item).then(() => this.setEditing());
-        } else {
-            return Promise.reject();
-        }
+        return this.validateItem(
+            item,
+            item => this.props.save(item).then(() => this.setEditing())
+        );
     };
     add = () => {
         this.props.add();
         this.setEditing(-1);
     };
-    validateItem = item => {
+    validateItem = (item, callback) => {
         let errors = [];
         for (let prop in item) {
             this.validateProperty(prop, item[prop], errors);
         }
-        this.setState({errors}, () => {
-            return errors.length === 0;
-        });
+        if (errors.length > 0) {
+            this.setState({errors});
+            return Promise.reject();
+        } else {
+            return callback(item);
+        }
     };
     validateProperty = (property, value, errors) => {
         switch(property) {
