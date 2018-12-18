@@ -95,12 +95,12 @@ export default function withApi(Wrapped) {
         saveItem = itemOrig => {
             const url = base + '/acquisitions/invoices/' + this.state.invoiceId + '/lines';
             const item = JSON.parse(JSON.stringify(itemOrig));
+            const itemsCopy = [...this.state.items];
+            let index = itemsCopy.findIndex(i => i.id === item.id);
             item.id = item.id > -1 ? item.id : null;
             return axios
                 .post(url, item)
                 .then(response => {
-                    const itemsCopy = [...this.state.items];
-                    let index = itemsCopy.findIndex(i => i.id === item.id);
                     index = index > -1 ? index : itemsCopy.length;
                     itemsCopy.splice(index, 1, response.data);
                     this.setState({ items: itemsCopy });
