@@ -31,7 +31,7 @@ const AcqInvoiceLineItemCalc = props => {
                 {isCalc() && (
                     <i
                         title="Value is calculated"
-                        className="calc-val fa fa-calculator"
+                        className="calc-val calc-right fa fa-calculator"
                     />
                 )}
             </div>
