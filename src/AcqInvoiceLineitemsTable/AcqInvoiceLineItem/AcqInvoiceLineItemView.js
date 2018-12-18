@@ -4,22 +4,35 @@ import AcqLineItemActions from './AcqInvoiceLineItemActions/AcqInvoiceLineItemAc
 import AcqInvoiceLineItemCalc from './AcqInvoiceLineItemCalc';
 
 const AcqInvoiceLineItem = props => {
+    const getTypeName = () => {
+        if (props.types && props.types.length) {
+            const found = props.types.find(t => t.id === props.item.item_type);
+            return (typeof found !== 'undefined') ? found.authorised_value : '';
+        } else {
+            return '';
+        }
+    }
+    const getFundName = () => {
+        if (props.funds && props.funds.length) {
+            const found = props.funds.find(f => f.fund_id === props.item.budget);
+            return (typeof found !== 'undefined') ? found.fund_name : '';
+        } else {
+            return '';
+        }
+    }
     return (
         <tr>
             <td className="react-acq-lineitem-description">
                 {props.item.description || ''}
             </td>
             <td>
-                {props.types && props.types.length
-                    ? props.types.find(t => t.id === props.item.item_type)
-                          .authorised_value
-                    : ''}
+                {getTypeName()}
             </td>
             <td>
-                {props.funds && props.funds.length
-                    ? props.funds.find(f => f.fund_id === props.item.budget)
-                          .fund_name
-                    : ''}
+                {getFundName()}
+            </td>
+            <td className="react-acq-lineitem-quantity">
+                {props.item.quantity || ''}
             </td>
             <td>
                 <AcqInvoiceLineItemCalc
