@@ -139,7 +139,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                                 })}
                                 {!this.state.editing && (
                                     <tr>
-                                        <td colSpan="8">&nbsp;</td>
+                                        <td colSpan="9">&nbsp;</td>
                                         <td colSpan="2">
                                             {Calc.getTotal(
                                                 this.props.items,
@@ -149,7 +149,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                                     </tr>
                                 )}
                                 <tr>
-                                    <td colSpan="10">
+                                    <td colSpan="11">
                                         <button
                                             id="react-acq-lineitems-button-add-new"
                                             disabled={this.state.editing}
