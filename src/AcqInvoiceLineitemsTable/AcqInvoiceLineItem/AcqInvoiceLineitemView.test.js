@@ -36,14 +36,11 @@ describe('<AcqInvoiceLineItemView />', () => {
     it('renders 1 table row', () => {
         expect(wrapper.find('tr')).toHaveLength(1);
     });
-    it('renders 10 table columns', () => {
-        expect(wrapper.find('td')).toHaveLength(10);
+    it('renders 11 table columns', () => {
+        expect(wrapper.find('td')).toHaveLength(11);
     });
     it('renders 4 <AcqInvoiceLineItemCalc /> elements', () => {
         expect(wrapper.find('AcqInvoiceLineItemCalc')).toHaveLength(4);
-    });
-    it('renders 1 <AcqInvoiceLineItemActions /> element', () => {
-        expect(wrapper.find('AcqInvoiceLineItemActions')).toHaveLength(1);
     });
     it('Displays the description, if defined', () => {
         expect(wrapper.find('td.react-acq-lineitem-description').text()).toBe(

@@ -44,14 +44,11 @@ describe('<AcqInvoiceLineItemEditable />', () => {
     it('renders 1 table row', () => {
         expect(wrapper.find('tr')).toHaveLength(1);
     });
-    it('renders 10 table columns', () => {
-        expect(wrapper.find('td')).toHaveLength(10);
+    it('renders 11 table columns', () => {
+        expect(wrapper.find('td')).toHaveLength(11);
     });
     it('renders 4 <AcqInvoiceLineItemCalc /> elements', () => {
         expect(wrapper.find('AcqInvoiceLineItemCalc')).toHaveLength(4);
-    });
-    it('renders 1 <AcqInvoiceLineItemActions /> element', () => {
-        expect(wrapper.find('AcqInvoiceLineItemActions')).toHaveLength(1);
     });
     it('handleChange takes a property and value and modifies the state item object accordingly', () => {
         let newState = wrapper.state();
@@ -66,7 +63,7 @@ describe('<AcqInvoiceLineItemEditable />', () => {
     });
     it('Displays the description, if defined', () => {
         expect(
-            wrapper.find('input.react-acq-lineitem-edit-description').props()
+            wrapper.find('td#react-acq-lineitem-edit-description input').props()
                 .value
         ).toBe('This is the item description');
     });
@@ -79,7 +76,7 @@ describe('<AcqInvoiceLineItemEditable />', () => {
             }
         });
         expect(
-            wrapper.find('input.react-acq-lineitem-edit-description').props()
+            wrapper.find('td#react-acq-lineitem-edit-description input').props()
                 .value
         ).toBe('');
     });
@@ -87,13 +84,13 @@ describe('<AcqInvoiceLineItemEditable />', () => {
         let newState = wrapper.state();
         newState.item.description = 5;
         wrapper
-            .find('input.react-acq-lineitem-edit-description')
+            .find('td#react-acq-lineitem-edit-description input')
             .simulate('change', { target: { value: 5 } });
         expect(wrapper.state()).toEqual(newState);
     });
     it('Displays the tax_rate, if defined', () => {
         expect(
-            wrapper.find('input.react-acq-lineitem-edit-tax_rate').props().value
+            wrapper.find('td#react-acq-lineitem-edit-tax_rate input').props().value
         ).toBe(20);
     });
     it('Displays an empty string for tax_rate, if null', () => {
@@ -105,20 +102,20 @@ describe('<AcqInvoiceLineItemEditable />', () => {
             }
         });
         expect(
-            wrapper.find('input.react-acq-lineitem-edit-tax_rate').props().value
+            wrapper.find('td#react-acq-lineitem-edit-tax_rate input').props().value
         ).toBe('');
     });
     it('Changing tax_rate in the input updates the state', () => {
         let newState = wrapper.state();
         newState.item.tax_rate = 5;
         wrapper
-            .find('input.react-acq-lineitem-edit-tax_rate')
+            .find('td#react-acq-lineitem-edit-tax_rate input')
             .simulate('change', { target: { value: 5 } });
         expect(wrapper.state()).toEqual(newState);
     });
     it('Displays the tax_amount, if defined', () => {
         expect(
-            wrapper.find('input.react-acq-lineitem-edit-tax_amount').props()
+            wrapper.find('td#react-acq-lineitem-edit-tax_amount input').props()
                 .value
         ).toBe(20);
     });
@@ -131,7 +128,7 @@ describe('<AcqInvoiceLineItemEditable />', () => {
             }
         });
         expect(
-            wrapper.find('input.react-acq-lineitem-edit-tax_amount').props()
+            wrapper.find('td#react-acq-lineitem-edit-tax_amount input').props()
                 .value
         ).toBe('');
     });
@@ -139,7 +136,7 @@ describe('<AcqInvoiceLineItemEditable />', () => {
         let newState = wrapper.state();
         newState.item.tax_amount = 5;
         wrapper
-            .find('input.react-acq-lineitem-edit-tax_amount')
+            .find('td#react-acq-lineitem-edit-tax_amount input')
             .simulate('change', { target: { value: 5 } });
         expect(wrapper.state()).toEqual(newState);
     });

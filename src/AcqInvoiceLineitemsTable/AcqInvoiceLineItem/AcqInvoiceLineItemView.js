@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AcqLineItemActions from './AcqInvoiceLineItemActions/AcqInvoiceLineItemActions';
+import AcqInvoiceLineItemActions from './AcqInvoiceLineItemActions/AcqInvoiceLineItemActions';
 import AcqInvoiceLineItemCalc from './AcqInvoiceLineItemCalc';
 
 const AcqInvoiceLineItem = props => {
@@ -31,7 +31,7 @@ const AcqInvoiceLineItem = props => {
             <td>
                 {getFundName()}
             </td>
-            <td className="react-acq-lineitem-quantity">
+            <td className="react-acq-lineitem-quantity"AcqInvoiceLineItemActions>
                 {props.item.quantity || ''}
             </td>
             <td>
@@ -73,7 +73,7 @@ const AcqInvoiceLineItem = props => {
                 />
             </td>
             <td>
-                <AcqLineItemActions
+                <AcqInvoiceLineItemActions
                     editing={props.editing}
                     setEditing={props.setEditing}
                     item={props.item}

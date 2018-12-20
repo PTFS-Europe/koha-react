@@ -50,6 +50,7 @@ export default function withModal(Wrapped) {
                 <div>
                     <Wrapped showModal={this.show} {...this.props} />
                     <Modal
+                        id="acq-lineitems-modal"
                         show={this.state.display}
                         onHide={this.hide}
                         bsSize="small"

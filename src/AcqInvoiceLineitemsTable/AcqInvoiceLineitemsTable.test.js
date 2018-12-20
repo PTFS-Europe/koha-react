@@ -47,7 +47,7 @@ describe('<AcqInvoiceLineitemsTable />', () => {
         wrapper = shallow(
             <AcqInvoiceLineitemsTable
                 items={items}
-                save={() => {}}
+                save={() => Promise.resolve()}
                 add={() => {}}
             />
         );
@@ -78,8 +78,8 @@ describe('<AcqInvoiceLineitemsTable />', () => {
         button.simulate('click');
         expect(wrapper.state().editing).toBe(-1);
     });
-    it('renders 10 table columns', () => {
-        expect(wrapper.find('th')).toHaveLength(10);
+    it('renders 11 table columns', () => {
+        expect(wrapper.find('th')).toHaveLength(11);
     });
     it('setEditing() should set the state "editing" property to the passed ID', () => {
         wrapper.instance().setEditing(editableId);
@@ -87,11 +87,6 @@ describe('<AcqInvoiceLineitemsTable />', () => {
     });
     it('setEditing() should set the state "editing" property to null when not passed an ID', () => {
         wrapper.instance().setEditing();
-        expect(wrapper.state().editing).toBe(null);
-    });
-    it('save() should set the state "editing" property to null after saving', () => {
-        wrapper.instance().setEditing(5);
-        wrapper.instance().save();
         expect(wrapper.state().editing).toBe(null);
     });
     it('add() should set the state "editing" property to -1', () => {

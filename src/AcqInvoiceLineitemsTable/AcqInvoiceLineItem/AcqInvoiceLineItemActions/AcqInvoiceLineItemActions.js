@@ -36,7 +36,7 @@ export class AcqInvoiceLineItemActions extends Component {
                     this.props.showModal({
                         title: 'There was an error',
                         msg: msg.toString()
-                    })
+                    });
                 }
             })
             .then(() => this.setState({ inProgress: false }));
@@ -94,7 +94,7 @@ export class AcqInvoiceLineItemActions extends Component {
                             </button>
                             <button
                                 type="button"
-                                className="react-acq-lineitem-disp-actions-cancel"
+                                className="react-acq-lineitem-edit-actions-cancel"
                                 onClick={() =>
                                     this.props.cancel(this.props.item.id)
                                 }
