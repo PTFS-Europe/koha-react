@@ -57,7 +57,7 @@ describe('calc.js', () => {
     });
 
     it('getTotal should take an array of items and return the sum of the totals for each item, calculated or otherwise', () => {
-        expect(calc.getTotal(items, 'list_price')).toBe(53.379);
+        expect(calc.getTotal(items, 'list_price')).toBe(65.97);
     });
 
     it('list_price should take an item and return the list_price calculated from the discount_rate and pre_tax_amount', () => {
@@ -103,19 +103,23 @@ describe('calc.js', () => {
     it('total_price should take an item and return the total_price calculated from the pre_tax_amount and tax_rate OR tax_amount', () => {
         const goodTaxRate = {
             pre_tax_amount: 9,
-            tax_rate: 10
+            tax_rate: 10,
+            quantity: 1
         };
         const goodTaxAmount = {
             pre_tax_amount: 9,
-            tax_amount: 1
+            tax_amount: 1,
+            quantity: 1
         };
         const badTax = {
             pre_tax_amount: 9,
             tax_rate: 10,
-            tax_amount: 1
+            tax_amount: 1,
+            quantity: 1
         };
         const noTax = {
-            pre_tax_amount: 9
+            pre_tax_amount: 9,
+            quantity: 1
         };
         expect(calc.total_price(goodTaxRate)).toBe(9.9);
         expect(calc.total_price(goodTaxAmount)).toBe(10);
