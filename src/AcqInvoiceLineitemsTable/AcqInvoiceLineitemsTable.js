@@ -81,8 +81,7 @@ export class AcqInvoiceLineitemsTable extends Component {
             <EditingContext.Provider
                 value={{
                     editing: this.state.editing,
-                    setEditing: this.setEditing,
-                    readonly: this.props.readonly
+                    setEditing: this.setEditing
                 }}
             >
                 {this.state.errors.length > 0 && (
@@ -138,6 +137,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                                                 item={item}
                                                 funds={this.props.funds}
                                                 types={this.props.types}
+                                                readonly={this.props.readonly}
                                             />
                                         );
                                     }
