@@ -20,8 +20,12 @@ export default function withApi(Wrapped) {
             this.setState(
                 {
                     loading: true,
-                    invoiceId: window.invoiceId ? window.invoiceId : null,
-                    orderNumber: window.orderNumber ? window.orderNumber : null
+                    invoiceId: this.props.invoiceId
+                        ? this.props.invoiceId
+                        : null,
+                    orderNumber: this.props.orderNumber
+                        ? this.props.orderNumber
+                        : null
                 },
                 // Ensure population happens after our state has been set
                 () => this.populate()
@@ -93,7 +97,11 @@ export default function withApi(Wrapped) {
         };
 
         saveItem = itemOrig => {
-            let url = base + '/acquisitions/invoices/' + this.state.invoiceId + '/lines';
+            let url =
+                base +
+                '/acquisitions/invoices/' +
+                this.state.invoiceId +
+                '/lines';
             const item = JSON.parse(JSON.stringify(itemOrig));
             const itemsCopy = [...this.state.items];
             let index = itemsCopy.findIndex(i => i.id === item.id);
@@ -122,7 +130,7 @@ export default function withApi(Wrapped) {
             const itemsCopy = [...this.state.items];
             itemsCopy.push({
                 id: -1,
-                order_id: window.orderNumber,
+                order_id: this.props.orderNumber,
                 budget: '',
                 item_type: '',
                 description: '',
@@ -146,7 +154,12 @@ export default function withApi(Wrapped) {
         };
 
         deleteItem = id => {
-            const url = base + '/acquisitions/invoices/' + this.state.invoiceId + '/lines/' + id;
+            const url =
+                base +
+                '/acquisitions/invoices/' +
+                this.state.invoiceId +
+                '/lines/' +
+                id;
             return axios
                 .delete(url)
                 .then(() => {

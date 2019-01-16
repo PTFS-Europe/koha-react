@@ -27,9 +27,8 @@ export class AcqInvoiceLineitemsTable extends Component {
         });
     };
     save = item => {
-        return this.validateItem(
-            item,
-            item => this.props.save(item).then(() => this.setEditing())
+        return this.validateItem(item, item =>
+            this.props.save(item).then(() => this.setEditing())
         );
     };
     add = () => {
@@ -42,14 +41,14 @@ export class AcqInvoiceLineitemsTable extends Component {
             this.validateProperty(prop, item[prop], errors);
         }
         if (errors.length > 0) {
-            this.setState({errors});
+            this.setState({ errors });
             return Promise.reject();
         } else {
             return callback(item);
         }
     };
     validateProperty = (property, value, errors) => {
-        switch(property) {
+        switch (property) {
             case 'description':
                 if (!value || value.length === 0) {
                     errors.push('You must include a description');
@@ -70,22 +69,28 @@ export class AcqInvoiceLineitemsTable extends Component {
         }
     };
     render() {
+        if (this.props.loading) {
+            return <div id="react-acq-lineitems-loading">Loading...</div>;
+        }
+        if (this.props.items.length === 0) {
+            return (
+                <div id="react-acq-lineitems-loading">No line items found</div>
+            );
+        }
         return (
             <EditingContext.Provider
                 value={{
                     editing: this.state.editing,
-                    setEditing: this.setEditing
+                    setEditing: this.setEditing,
+                    readonly: this.props.readonly
                 }}
             >
-                {this.props.loading && (
-                    <div id="react-acq-lineitems-loading">Loading...</div>
-                )}
                 {this.state.errors.length > 0 && (
                     <div id="react-acq-lineitems-errors" className="error">
                         <ul>
-                            {this.state.errors.map(error => 
+                            {this.state.errors.map(error => (
                                 <li key={error}>{error}</li>
-                            )}
+                            ))}
                         </ul>
                     </div>
                 )}
@@ -148,17 +153,19 @@ export class AcqInvoiceLineitemsTable extends Component {
                                         </td>
                                     </tr>
                                 )}
-                                <tr>
-                                    <td colSpan="11">
-                                        <button
-                                            id="react-acq-lineitems-button-add-new"
-                                            disabled={this.state.editing}
-                                            onClick={this.add}
-                                        >
-                                            Add new
-                                        </button>
-                                    </td>
-                                </tr>
+                                {!this.props.readonly && (
+                                    <tr>
+                                        <td colSpan="11">
+                                            <button
+                                                id="react-acq-lineitems-button-add-new"
+                                                disabled={this.state.editing}
+                                                onClick={this.add}
+                                            >
+                                                Add new
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
