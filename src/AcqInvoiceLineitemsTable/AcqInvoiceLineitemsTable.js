@@ -72,7 +72,7 @@ export class AcqInvoiceLineitemsTable extends Component {
         if (this.props.loading) {
             return <div id="react-acq-lineitems-loading">Loading...</div>;
         }
-        if (this.props.items.length === 0) {
+        if (this.props.readonly && this.props.items.length === 0) {
             return (
                 <div id="react-acq-lineitems-loading">No line items found</div>
             );
