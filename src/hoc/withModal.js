@@ -61,7 +61,7 @@ export default function withModal(Wrapped) {
                         <Modal.Body>{this.state.msg}</Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.hide}>
-                                Close
+                                {window._('Close')}
                             </Button>
                             {this.state.confirm && (
                                 <Button

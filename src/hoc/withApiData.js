@@ -121,7 +121,7 @@ export default function withApi(Wrapped) {
                         ? error.response.data.errors
                               .map(e => e.message)
                               .join(', ')
-                        : 'Unknown error';
+                        : window._('Unknown error');
                     throw new Error(msg);
                 });
         };
@@ -170,7 +170,7 @@ export default function withApi(Wrapped) {
                         ? error.response.data.errors
                               .map(e => e.message)
                               .join(', ')
-                        : 'Unknown error';
+                        : window._('Unknown error');
                     throw new Error(msg);
                 });
         };

@@ -30,7 +30,7 @@ const AcqInvoiceLineItemCalc = props => {
                     : ''}
                 {isCalc() && (
                     <i
-                        title="Value is calculated"
+                        title={window._('Value is calculated')}
                         className="calc-val calc-right fa fa-calculator"
                     />
                 )}
@@ -48,7 +48,7 @@ const AcqInvoiceLineItemCalc = props => {
                 />
                 {isCalc() && (
                     <i
-                        title="Value is calculated"
+                        title={window._('Value is calculated')}
                         className="calc-val fa fa-calculator"
                     />
                 )}

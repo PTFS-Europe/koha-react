@@ -17,7 +17,7 @@ export class AcqInvoiceLineItemActions extends Component {
             .catch(msg => {
                 if (msg) {
                     this.props.showModal({
-                        title: 'There was an error',
+                        title: window._('There was an error'),
                         msg: msg.toString()
                     });
                 }
@@ -34,7 +34,7 @@ export class AcqInvoiceLineItemActions extends Component {
             .catch(msg => {
                 if (msg) {
                     this.props.showModal({
-                        title: 'There was an error',
+                        title: window._('There was an error'),
                         msg: msg.toString()
                     });
                 }
@@ -59,16 +59,16 @@ export class AcqInvoiceLineItemActions extends Component {
                                 }
                                 onClick={() =>
                                     this.props.showModal({
-                                        title: 'Delete line item',
-                                        msg: 'Are you sure?',
-                                        btnText: 'Delete',
+                                        title: window._('Delete line item'),
+                                        msg: window._('Are you sure?'),
+                                        btnText: window._('Delete'),
                                         confirm: this.delete
                                     })
                                 }
                             >
                                 {this.state.inProgress
-                                    ? 'Deleting...'
-                                    : 'Delete'}
+                                    ? window._('Deleting...')
+                                    : window._('Delete')}
                             </button>
                             <button
                                 type="button"
@@ -79,7 +79,7 @@ export class AcqInvoiceLineItemActions extends Component {
                                 }
                                 onClick={() => setEditing(this.props.item.id)}
                             >
-                                Edit
+                                {window._('Edit')}
                             </button>
                         </div>
                     ) : (
@@ -90,7 +90,9 @@ export class AcqInvoiceLineItemActions extends Component {
                                 className="react-acq-lineitem-edit-actions-save"
                                 onClick={() => this.save(this.props.item)}
                             >
-                                {this.state.inProgress ? 'Saving...' : 'Save'}
+                                {this.state.inProgress
+                                    ? window._('Saving...')
+                                    : window._('Save')}
                             </button>
                             <button
                                 type="button"
@@ -99,7 +101,7 @@ export class AcqInvoiceLineItemActions extends Component {
                                     this.props.cancel(this.props.item.id)
                                 }
                             >
-                                Cancel
+                                {window._('Cancel')}
                             </button>
                         </div>
                     );

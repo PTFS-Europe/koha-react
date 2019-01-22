@@ -51,17 +51,17 @@ export class AcqInvoiceLineitemsTable extends Component {
         switch (property) {
             case 'description':
                 if (!value || value.length === 0) {
-                    errors.push('You must include a description');
+                    errors.push(window._('You must include a description'));
                 }
                 break;
             case 'item_type':
                 if (!value || value === '') {
-                    errors.push('You must choose an item type');
+                    errors.push(window._('You must choose an item type'));
                 }
                 break;
             case 'quantity':
                 if (!/\d+/.test(value) || value < 1) {
-                    errors.push('Quantity must be greater than zero');
+                    errors.push(window._('Quantity must be greater than zero'));
                 }
                 break;
             default:
@@ -70,11 +70,17 @@ export class AcqInvoiceLineitemsTable extends Component {
     };
     render() {
         if (this.props.loading) {
-            return <div id="react-acq-lineitems-loading">Loading...</div>;
+            return (
+                <div id="react-acq-lineitems-loading">
+                    {window._('Loading...')}
+                </div>
+            );
         }
         if (this.props.readonly && this.props.items.length === 0) {
             return (
-                <div id="react-acq-lineitems-loading">No line items found</div>
+                <div id="react-acq-lineitems-loading">
+                    {window._('No line items found')}
+                </div>
             );
         }
         return (
@@ -98,16 +104,16 @@ export class AcqInvoiceLineitemsTable extends Component {
                         <table id="react-acq-lineitems-table">
                             <thead>
                                 <tr>
-                                    <th>Description</th>
-                                    <th>Type</th>
-                                    <th>Fund</th>
-                                    <th>Quantity</th>
-                                    <th>List price</th>
-                                    <th>Discount %</th>
-                                    <th>Your price</th>
-                                    <th>Tax rate %</th>
-                                    <th>Tax amount</th>
-                                    <th>Total</th>
+                                    <th>{window._('Description')}</th>
+                                    <th>{window._('Type')}</th>
+                                    <th>{window._('Fund')}</th>
+                                    <th>{window._('Quantity')}</th>
+                                    <th>{window._('List price')}</th>
+                                    <th>{window._('Discount')} %</th>
+                                    <th>{window._('Your price')}</th>
+                                    <th>{window._('Tax rate')} %</th>
+                                    <th>{window._('Tax amount')}</th>
+                                    <th>{window._('Total')}</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
@@ -161,7 +167,7 @@ export class AcqInvoiceLineitemsTable extends Component {
                                                 disabled={this.state.editing}
                                                 onClick={this.add}
                                             >
-                                                Add new
+                                                {window._('Add new')}
                                             </button>
                                         </td>
                                     </tr>

@@ -29,7 +29,7 @@ export class AcqInvoiceLineItemEditable extends Component {
             <tr>
                 <td id="react-acq-lineitem-edit-description">
                     <input
-                        placeholder="Item description"
+                        placeholder={window._('Item description')}
                         type="text"
                         onChange={event =>
                             this.handleChange('description', event.target.value)
@@ -53,7 +53,7 @@ export class AcqInvoiceLineItemEditable extends Component {
                 </td>
                 <td id="react-acq-lineitem-edit-quantity">
                     <input
-                        placeholder="Quantity"
+                        placeholder={window._('Quantity')}
                         type="number"
                         onChange={event =>
                             this.handleChange('quantity', event.target.value)
@@ -87,7 +87,7 @@ export class AcqInvoiceLineItemEditable extends Component {
                 </td>
                 <td id="react-acq-lineitem-edit-tax_rate">
                     <input
-                        placeholder="Tax rate"
+                        placeholder={window._('Tax rate')}
                         type="number"
                         onChange={event =>
                             this.handleChange('tax_rate', event.target.value)
@@ -97,7 +97,7 @@ export class AcqInvoiceLineItemEditable extends Component {
                 </td>
                 <td id="react-acq-lineitem-edit-tax_amount">
                     <input
-                        placeholder="Tax amount"
+                        placeholder={window._('Tax amount')}
                         type="number"
                         onChange={event =>
                             this.handleChange('tax_amount', event.target.value)
