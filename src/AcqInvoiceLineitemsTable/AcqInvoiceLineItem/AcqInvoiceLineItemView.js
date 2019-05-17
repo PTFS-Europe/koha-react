@@ -15,7 +15,7 @@ const AcqInvoiceLineItem = props => {
     const getFundName = () => {
         if (props.funds && props.funds.length) {
             const found = props.funds.find(
-                f => f.fund_id === props.item.budget
+                f => f.fund_id == props.item.budget
             );
             return typeof found !== 'undefined' ? found.fund_name : '';
         } else {
