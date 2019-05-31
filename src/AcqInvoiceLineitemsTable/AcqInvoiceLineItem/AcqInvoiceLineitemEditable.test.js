@@ -8,6 +8,8 @@ import { AcqInvoiceLineItemEditable } from './AcqInvoiceLineItemEditable';
 configure({ adapter: new Adapter() });
 
 describe('<AcqInvoiceLineItemEditable />', () => {
+    // Mock _
+    global._ = () => true;
     let wrapper;
     const item = {
         id: 5,
@@ -90,7 +92,8 @@ describe('<AcqInvoiceLineItemEditable />', () => {
     });
     it('Displays the tax_rate, if defined', () => {
         expect(
-            wrapper.find('td#react-acq-lineitem-edit-tax_rate input').props().value
+            wrapper.find('td#react-acq-lineitem-edit-tax_rate input').props()
+                .value
         ).toBe(20);
     });
     it('Displays an empty string for tax_rate, if null', () => {
@@ -102,7 +105,8 @@ describe('<AcqInvoiceLineItemEditable />', () => {
             }
         });
         expect(
-            wrapper.find('td#react-acq-lineitem-edit-tax_rate input').props().value
+            wrapper.find('td#react-acq-lineitem-edit-tax_rate input').props()
+                .value
         ).toBe('');
     });
     it('Changing tax_rate in the input updates the state', () => {

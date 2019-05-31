@@ -111,19 +111,12 @@ describe('calc.js', () => {
             tax_amount: 1,
             quantity: 1
         };
-        const badTax = {
-            pre_tax_amount: 9,
-            tax_rate: 10,
-            tax_amount: 1,
-            quantity: 1
-        };
         const noTax = {
             pre_tax_amount: 9,
             quantity: 1
         };
         expect(calc.total_price(goodTaxRate)).toBe(9.9);
         expect(calc.total_price(goodTaxAmount)).toBe(10);
-        expect(calc.total_price(badTax)).toBe(false);
         expect(calc.total_price(noTax)).toBe(9);
     });
 });

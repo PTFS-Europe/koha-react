@@ -11,6 +11,8 @@ configure({ adapter: new Adapter() });
 
 describe('<AcqInvoiceLineitemsTable />', () => {
     let wrapper;
+    // Mock _
+    global._ = () => true;
     const items = [
         {
             id: 5,

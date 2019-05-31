@@ -10,6 +10,8 @@ configure({ adapter: new Adapter() });
 
 describe('<AcqInvoiceLineItemCalc />', () => {
     let wrapper;
+    // Mock _
+    global._ = () => true;
     const item = {
         id: 5,
         invoice: 3,
